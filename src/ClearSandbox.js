@@ -7,7 +7,7 @@
 var	page = {
 		ptwikibooks: [ 'Wikilivros:Caixa_de_areia', '116378', 'Limpeza' ],
 		ptwiki: [ 'Wikipédia:Página_de_testes/1', '29264502', 'Limpeza' ],
-		enwiki: [ 'Wikipedia:Sandbox', '481366230', 'Clearing' ]
+		enwiki: [ 'Wikipedia:Sandbox', '481366230', 'Cleaning' ]
 	}[ mw.config.get( 'wgDBname' ) ],
 	api;
 
