@@ -19,6 +19,7 @@ function clearSandbox ( text ){
 		text: text,
 		summary: page[2],
 		minor: true,
+		watchlist: 'nochange',
 		token: mw.user.tokens.get( 'editToken' )
 	}, {
 		ok: function( data ) {
