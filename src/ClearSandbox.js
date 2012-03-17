@@ -1,22 +1,46 @@
-/* Script to clear the Sandbox */
-/*global $, jsMsg, mw */
-/*jslint white: true */
-(function(){
+/**
+ * Script to clear the Sandbox
+ * @author: [[User:Helder.wiki]]
+ * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/ClearSandbox.js]] ([[File:User:Helder.wiki/Tools/ClearSandbox.js]])
+ */
+/*jslint browser: true, white: true*/
+/*global jQuery, mediaWiki, jsMsg */
+( function ( $, mw /* , undefined */ ) {
 'use strict';
 
 var	page = {
-		ptwikibooks: [ 'Wikilivros:Caixa_de_areia', '116378', 'Limpeza' ],
-		ptwiki: [ 'Wikipédia:Página_de_testes/1', '29264502', 'Limpeza' ],
-		enwiki: [ 'Wikipedia:Sandbox', '481366230', 'Cleaning' ]
+		ptwikibooks: [
+			'Wikilivros:Caixa_de_areia',
+			'<noinclude>{{sandbox}}<!-- escreva abaixo se faz favor' +
+				' --></noinclude>',
+			'Limpeza'
+		],
+		ptwiki: [
+			'Wikipédia:Página_de_testes/1',
+			'<!--não apague esta linha-->{{página de testes}}' +
+				'<!--não apague esta linha-->\n<!--Escreva abaixo' +
+				' da linha! -------------------------------- -->',
+			'Limpeza'
+		],
+		enwiki: [
+			'Wikipedia:Sandbox',
+			'{{Please leave this line alone (sandbox heading)}}\n' +
+				'<!-- Hello! Feel free to try your formatting and' +
+				' editing skills below this line. As this page is' +
+				' for editing experiments, this page will' +
+				' automatically be cleaned every 12 hours. -->',
+			'Cleaning'
+		]
 	}[ mw.config.get( 'wgDBname' ) ],
 	api;
 
-function clearSandbox ( text ){
+function clearSandbox (){
+	api = new mw.Api();
 	api.post({
 		format: 'json',
 		action: 'edit',
 		title: page[0],
-		text: text,
+		text: page[1],
 		summary: page[2],
 		minor: true,
 		watchlist: 'nochange',
@@ -32,43 +56,21 @@ function clearSandbox ( text ){
 	});
 }
 
-function getCleanVersionOfSandbox(){
-	api = new mw.Api();
-	api.get( {
-		action: 'query',
-		prop: 'revisions',
-		rvprop: 'content',
-		rvlimit: 1,
-		titles: page[0],
-		rvstartid: page[1],
-		indexpageids: true
-	}, {
-		ok: function ( data ) {
-			var     q = data.query,
-				id = q && q.pageids && q.pageids[0],
-				pg = id && q.pages && q.pages[ id ],
-				rv = pg && pg.revisions;
-			if ( rv && rv[0] && rv[0]['*'] ) {
-				clearSandbox( rv[0]['*'] );
-			}
-		}
-	} );
-}
-
 function addClearLink (){
 	$(mw.util.addPortletLink(
 		'p-views',
-		mw.util.wikiGetlink() + '?action=edit&oldid=' + page[1],
+		'#',
 		'Limpar',
 		'ca-clear',
 		'Limpar a página'
 	)).click(function(e){
 		e.preventDefault();
-		mw.loader.using( 'mediawiki.api.edit', getCleanVersionOfSandbox );
+		mw.loader.using( 'mediawiki.api.edit', clearSandbox );
 	});
 }
 
 if( page && mw.config.get( 'wgPageName' ) === page[0] ){
 	$(addClearLink);
 }
-}());
+
+}( jQuery, mediaWiki ) );
