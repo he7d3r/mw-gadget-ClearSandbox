@@ -31,13 +31,11 @@ var	page = {
 				' automatically be cleaned every 12 hours. -->',
 			'Cleaning'
 		]
-	}[ mw.config.get( 'wgDBname' ) ],
-	api;
+	}[ mw.config.get( 'wgDBname' ) ];
 
 function clearSandbox (){
-	api = new mw.Api();
+	var api = new mw.Api();
 	api.post({
-		format: 'json',
 		action: 'edit',
 		title: page[0],
 		text: page[1],
@@ -45,13 +43,12 @@ function clearSandbox (){
 		minor: true,
 		watchlist: 'nochange',
 		token: mw.user.tokens.get( 'editToken' )
-	}, {
-		ok: function( data ) {
-			if ( data && data.edit && data.edit.result && data.edit.result === 'Success' ) {
-				jsMsg( 'A página foi editada' );
-			} else {
-				jsMsg( 'Houve um erro ao tentar editar' );
-			}
+	})
+	.done( function( data ) {
+		if ( data && data.edit && data.edit.result && data.edit.result === 'Success' ) {
+			jsMsg( 'A página foi editada' );
+		} else {
+			jsMsg( 'Houve um erro ao tentar editar' );
 		}
 	});
 }
