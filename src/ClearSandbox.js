@@ -4,7 +4,7 @@
  * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/ClearSandbox.js]] ([[File:User:Helder.wiki/Tools/ClearSandbox.js]])
  */
 /*jslint browser: true, white: true*/
-/*global jQuery, mediaWiki, jsMsg */
+/*global jQuery, mediaWiki */
 ( function ( $, mw /* , undefined */ ) {
 'use strict';
 
@@ -46,9 +46,9 @@ function clearSandbox (){
 	})
 	.done( function( data ) {
 		if ( data && data.edit && data.edit.result && data.edit.result === 'Success' ) {
-			jsMsg( 'A página foi editada' );
+			mw.notify( 'A página foi editada' );
 		} else {
-			jsMsg( 'Houve um erro ao tentar editar' );
+			mw.notify( 'Houve um erro ao tentar editar' );
 		}
 	});
 }
