@@ -11,7 +11,7 @@
 var	page = {
 		ptwikibooks: [
 			'Wikilivros:Caixa_de_areia',
-			'<noinclude>{{sandbox}}<!-- escreva abaixo se faz favor' +
+			'<noinclude>{' + '{sandbox}}<!-- escreva abaixo se faz favor' +
 				' --></noinclude>',
 			'Limpeza'
 		],
