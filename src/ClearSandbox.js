@@ -17,14 +17,14 @@ var	page = {
 		],
 		ptwiki: [
 			'Wikipédia:Página_de_testes/1',
-			'<!--não apague esta linha-->{{página de testes}}' +
+			'<!--não apague esta linha-->{' + '{página de testes}}' +
 				'<!--não apague esta linha-->\n<!--Escreva abaixo' +
 				' da linha! -------------------------------- -->',
 			'Limpeza'
 		],
 		enwiki: [
 			'Wikipedia:Sandbox',
-			'{{Please leave this line alone (sandbox heading)}}\n' +
+			'{' + '{Please leave this line alone (sandbox heading)}}\n' +
 				'<!-- Hello! Feel free to try your formatting and' +
 				' editing skills below this line. As this page is' +
 				' for editing experiments, this page will' +
