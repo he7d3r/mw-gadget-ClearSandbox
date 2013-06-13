@@ -34,8 +34,7 @@ var	page = {
 	}[ mw.config.get( 'wgDBname' ) ];
 
 function clearSandbox (){
-	var api = new mw.Api();
-	api.post({
+	( new mw.Api() ).post({
 		action: 'edit',
 		title: page[0],
 		text: page[1],
