@@ -59,7 +59,7 @@
 			'Limpar a página'
 		)).click(function (e) {
 			e.preventDefault();
-			mw.loader.using( 'mediawiki.api.edit', clearSandbox );
+			mw.loader.using( 'mediawiki.api', clearSandbox );
 		});
 	}
 
