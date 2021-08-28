@@ -39,7 +39,7 @@
 			summary: page[2],
 			minor: true,
 			watchlist: 'nochange',
-			token: mw.user.tokens.get( 'editToken' )
+			token: mw.user.tokens.get( 'csrfToken' )
 		})
 		.done( function ( data ) {
 			if ( data && data.edit && data.edit.result && data.edit.result === 'Success' ) {
